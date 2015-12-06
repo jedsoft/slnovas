@@ -135,6 +135,7 @@ short int ephem_open (char *ephem_name,
    if (EPHFILE)
    {
       fclose (EPHFILE);
+      EPHFILE = NULL;		       /* http://aa.usno.navy.mil/software/novas/novas_faq.php */
       free (BUFFER);
    }
 
