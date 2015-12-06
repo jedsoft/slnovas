@@ -40,6 +40,7 @@ CFLAGS="$CFLAGS $IEEE_CFLAGS"
 
 AC_CONFIG_HEADER(src/config.h:src/config.hin)
 AC_OUTPUT(Makefile:autoconf/Makefile.in src/Makefile)
+AC_OUTPUT(libnovas/Makefile:libnovas/Makefile.in)
 
 echo ""
 echo "You are compiling with the following compiler configuration:"

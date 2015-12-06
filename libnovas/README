@@ -1,0 +1,9 @@
+The files in the Cdist directory were download from
+<http://aa.usno.navy.mil/software/novas/novas_c/novasc3.1.tar.gz>.
+The file ./Cdist/CIO_RA.TXT was subsequently compressed.  If you use
+it per the installation instructions on the website, you will need to
+decompress it.
+
+The NOVAS source code is built such that the external library symbols
+are prefixed with novas_.  Also, typedefs names have been changed such
+that foo becomes Novas_foo_t.

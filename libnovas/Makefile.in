@@ -1,0 +1,48 @@
+# -*-make-*-
+LIBNAME = libnovas
+NOVAS_SOLSYS_MODEL = 3
+#
+# ---------------------------------------------------------------------------
+# Directory where library is going to go when installed
+# ---------------------------------------------------------------------------
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+install_lib_dir = @libdir@
+install_include_dir = @includedir@
+#
+# ---------------------------------------------------------------------------
+# Misc Programs required for installation
+# ---------------------------------------------------------------------------
+INSTALL		= @INSTALL@
+INSTALL_DATA	= @INSTALL_DATA@
+MKINSDIR	= ../autoconf/mkinsdir.sh
+#
+# ---------------------------------------------------------------------------
+# DESTDIR is designed to facilitate making packages.  Normally it is empty
+# ---------------------------------------------------------------------------
+# DESTDIR =
+DEST_LIBDIR = $(DESTDIR)$(install_lib_dir)
+DEST_INCDIR = $(DESTDIR)$(install_include_dir)
+#
+CC_SHARED 	= @CC_SHARED@
+DEFS = -DNOVAS_SOLSYS_MODEL=$(NOVAS_SOLSYS_MODEL)
+#
+lib$(LIBNAME).so: libnovas.c libnovas.h _libnovas.h Makefile
+	$(CC_SHARED) $(DEFS) libnovas.c -o lib$(LIBNAME).so -lm
+testnovas: lib$(LIBNAME).so testnovas.c
+	$(CC) $(CFLAGS) $(DEFS) testnovas.c -o testnovas -L. -l$(LIBNAME)
+check: testnovas
+	./runtest.sh
+# ---------------------------------------------------------------------------
+install: lib$(LIBNAME).so
+	$(MKINSDIR) $(DEST_LIBDIR)
+	$(MKINSDIR) $(DEST_INCDIR)
+	$(INSTALL_DATA) libnovas.h $(DEST_INCDIR)/
+	$(INSTALL_DATA) lib$(LIBNAME).so $(DEST_LIBDIR)/
+#
+clean:
+	rm -f *~
+distclean: clean
+	rm -f Makefile lib$(LIBNAME).so testnovas testnovas.out
+#
+.PHONY: clean distclean
