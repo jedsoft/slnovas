@@ -4,6 +4,9 @@ The file ./Cdist/CIO_RA.TXT was subsequently compressed.  If you use
 it per the installation instructions on the website, you will need to
 decompress it.
 
+The sample JPL ephemeris file was obtained from
+<ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/de421/>.
+
 The NOVAS source code is built such that the external library symbols
 are prefixed with novas_.  Also, typedefs names have been changed such
 that foo becomes Novas_foo_t.

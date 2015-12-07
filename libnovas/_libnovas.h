@@ -101,6 +101,7 @@ static short int solarsystem_hp (double tjd[2], short body, short origin,
 
 /* novacon.h */
 #define _CONSTS_ 1		       /* prevent inclusion */
+#define T0 NOVAS_CONST_T0
 #define FN1 NOVAS_CONST_FN1
 #define FN0 NOVAS_CONST_FN0
 #define T0 NOVAS_CONST_T0
@@ -154,11 +155,13 @@ static void nu2000k (double jd_high, double jd_low,
 # define BUFFER _pNOVAS_EPHMAN_BUFFER
 # define EPHFILE _pNOVAS_EPHMAN_EPHFILE
 
-#define ephem_open novas_ephem_open
-#define ephem_close novas_ephem_close
 #define planet_ephemeris novas_planet_ephemeris
 
 #ifdef LIBNOVAS_SOURCE
+static short int ephem_open (char *ephem_name,
+			    double *jd_begin, double *jd_end,
+			    short int *de_number);
+static short int ephem_close (void);
 static short int state (double *jed, short int target,
                  double *target_pos, double *target_vel);
 static void interpolate (double *buf, double *t, long int ncm, long int na,

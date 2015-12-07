@@ -1,6 +1,6 @@
 # -*-make-*-
 LIBNAME = libnovas
-NOVAS_SOLSYS_MODEL = 3
+NOVAS_SOLSYS_MODEL = 1
 #
 # ---------------------------------------------------------------------------
 # Directory where library is going to go when installed
@@ -30,7 +30,9 @@ DEFS = -DNOVAS_SOLSYS_MODEL=$(NOVAS_SOLSYS_MODEL)
 lib$(LIBNAME).so: libnovas.c libnovas.h _libnovas.h Makefile
 	$(CC_SHARED) $(DEFS) libnovas.c -o lib$(LIBNAME).so -lm
 testnovas: lib$(LIBNAME).so testnovas.c
-	$(CC) $(CFLAGS) $(DEFS) testnovas.c -o testnovas -L. -l$(LIBNAME)
+	$(CC) $(CFLAGS) $(DEFS) testnovas.c -o testnovas -L. -l$(LIBNAME) -lm
+example: lib$(LIBNAME).so example.c
+	$(CC) $(CFLAGS) $(DEFS) example.c -o example -L. -l$(LIBNAME) -lm
 check: testnovas
 	./runtest.sh
 # ---------------------------------------------------------------------------
@@ -41,8 +43,8 @@ install: lib$(LIBNAME).so
 	$(INSTALL_DATA) lib$(LIBNAME).so $(DEST_LIBDIR)/
 #
 clean:
-	rm -f *~
+	rm -f *~ testnovas example lib$(LIBNAME).so testnovas.out
 distclean: clean
-	rm -f Makefile lib$(LIBNAME).so testnovas testnovas.out
+	rm -f Makefile
 #
 .PHONY: clean distclean
