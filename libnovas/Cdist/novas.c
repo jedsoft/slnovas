@@ -3957,7 +3957,7 @@ void wobble (double tjd, short int direction, double xp, double yp,
    yx =  sinx * siny * cosl + cosy * sinl;
    zx = -sinx * cosy * cosl + siny * sinl;
    xy = -cosx * sinl;
-   yy = -sinx * siny * sinl + cosy * cosl;
+   yy = -sinx * siny * sinl + cosy * cosl;   /* http://aa.usno.navy.mil/software/novas/novas_faq.php */
    zy =  sinx * cosy * sinl + siny * cosl;
    xz =  sinx;
    yz = -cosx * siny;

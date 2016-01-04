@@ -34,6 +34,16 @@ double *BUFFER;
 
 FILE *EPHFILE = NULL;
 
+/* This function addresses the issues associated with EPHFILE that are
+ * described at <http://aa.usno.navy.mil/software/novas/novas_faq.php>.
+ */
+static int eph_fclose (FILE **fpp)
+{
+   int ret = fclose (*fpp);
+   *fpp = NULL;
+   return ret;
+}
+
 /********ephem_open */
 
 short int ephem_open (char *ephem_name,
@@ -134,8 +144,7 @@ short int ephem_open (char *ephem_name,
 
    if (EPHFILE)
    {
-      fclose (EPHFILE);
-      EPHFILE = NULL;		       /* http://aa.usno.navy.mil/software/novas/novas_faq.php */
+      eph_fclose (&EPHFILE);
       free (BUFFER);
    }
 
@@ -177,49 +186,49 @@ short int ephem_open (char *ephem_name,
 
       if (fread (ttl, sizeof ttl, 1, EPHFILE) != 1)
       {
-         fclose (EPHFILE);
+         eph_fclose (&EPHFILE);
          return 2;
       }
       if (fread (cnam, sizeof cnam, 1, EPHFILE) != 1)
       {
-         fclose (EPHFILE);
+         eph_fclose (&EPHFILE);
          return 3;
       }
       if (fread (SS, sizeof SS, 1, EPHFILE) != 1)
       {
-         fclose (EPHFILE);
+         eph_fclose (&EPHFILE);
          return 4;
       }
       if (fread (&ncon, sizeof ncon, 1, EPHFILE) != 1)
       {
-         fclose (EPHFILE);
+         eph_fclose (&EPHFILE);
          return 5;
       }
       if (fread (&JPLAU, sizeof JPLAU, 1, EPHFILE) != 1)
       {
-         fclose (EPHFILE);
+         eph_fclose (&EPHFILE);
          return 6;
       }
       if (fread (&EM_RATIO, sizeof EM_RATIO, 1, EPHFILE) != 1)
       {
-         fclose (EPHFILE);
+         eph_fclose (&EPHFILE);
          return 7;
       }
       for (i = 0; i < 12; i++)
          for (j = 0; j < 3; j++)
             if (fread (&IPT[j][i], sizeof(int), 1, EPHFILE) != 1)
             {
-               fclose (EPHFILE);
+               eph_fclose (&EPHFILE);
                return 8;
             }
       if (fread (&denum, sizeof denum, 1, EPHFILE) != 1)
       {
-         fclose (EPHFILE);
+         eph_fclose (&EPHFILE);
          return 9;
       }
       if (fread (LPT, sizeof LPT, 1, EPHFILE) != 1)
       {
-         fclose (EPHFILE);
+         eph_fclose (&EPHFILE);
          return 10;
       }
 
@@ -250,7 +259,7 @@ short int ephem_open (char *ephem_name,
             *jd_begin = 0.0;
             *jd_end = 0.0;
             *de_number = 0;
-            fclose (EPHFILE);
+            eph_fclose (&EPHFILE);
             return 11;
             break;
       }
@@ -321,7 +330,7 @@ short int ephem_close (void)
 
    if (EPHFILE)
    {
-      error =  (short int) fclose (EPHFILE);
+      error =  (short int) eph_fclose (&EPHFILE);
       free (BUFFER);
    }
    return error;
