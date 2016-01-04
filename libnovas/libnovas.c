@@ -6,6 +6,10 @@
 
 #define LIBNOVAS_SOURCE
 
+#ifndef NOVAS_DATADIR
+# define NOVAS_DATADIR "/usr/local/share/libnovas"
+#endif
+
 #ifndef NOVAS_SOLSYS_MODEL
 # define NOVAS_SOLSYS_MODEL 3
 #endif
@@ -63,4 +67,47 @@ short novas_ephem_close (void)
 #include "Cdist/readeph0.c"
 #include "Cdist/novas.c"
 #include "Cdist/nutation.c"
+
+#ifdef fopen
+# undef fopen
+#endif
+
+static char *create_datadir_filename (const char *file)
+{
+#ifdef NOVAS_DATADIR
+   char *newfile;
+   size_t len;
+
+   len = strlen (NOVAS_DATADIR);
+   newfile = (char *) malloc (len + 1 + strlen(file) + 1);
+   if (newfile != NULL)
+     {
+	strcpy (newfile, NOVAS_DATADIR);
+	newfile[len] = '/';
+	strcpy (newfile + len + 1, file);
+     }
+   return newfile;
+#else
+   return NULL;
+#endif
+}
+
+static FILE *_novas_fopen (const char *file, const char *mode)
+{
+   char *newfile;
+   FILE *fp;
+
+   if (NULL != (fp = fopen (file, mode)))
+     return fp;
+
+   if (NULL != strchr (file, '/'))
+     return NULL;
+
+   if (NULL == (newfile = create_datadir_filename (file)))
+     return NULL;
+
+   fp = fopen (newfile, mode);
+   free (newfile);
+   return fp;
+}
 

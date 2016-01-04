@@ -36,19 +36,19 @@ int main (void)
   application.
  */
 
-   const short int year = 2008;
-   const short int month = 4;
-   const short int day = 24;
+   const short int year = 2015;
+   const short int month = 12;
+   const short int day = 15;
    const short int leap_secs = 33;
    const short int accuracy = 0;
    short int error = 0;
    short int de_num = 0;
 
-   const double hour = 10.605;
+   const double hour = 10 + 5.0/60 + 5;
    const double ut1_utc = -0.387845;
 
-   const double latitude = 42.0;
-   const double longitude = -70;
+   const double latitude = 42.3605;
+   const double longitude = -71.0596;
    const double height = 0.0;
    const double temperature = 10.0;
    const double pressure = 1010.0;
@@ -236,7 +236,7 @@ int main (void)
       &zd,&az,&rar,&decr);
 
    printf ("Moon zenith distance and azimuth:\n");
-   printf ("%15.10f        %15.10f\n", zd, az);
+   printf ("%15.10f        %15.10f (decr=%.15f)\n", zd, az, decr);
    printf ("\n");
 
 /*

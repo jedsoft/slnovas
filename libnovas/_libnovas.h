@@ -19,6 +19,8 @@
 
 #ifdef LIBNOVAS_SOURCE
 static double *readeph (int mp, char *name, double jd, int *err);
+# define fopen _novas_fopen
+static FILE *_novas_fopen (const char *file, const char *mode);
 #endif
 
 #define app_star novas_app_star
@@ -63,6 +65,7 @@ static double *readeph (int mp, char *name, double jd, int *err);
 #define nutation novas_nutation
 #define nutation_angles novas_nutation_angles
 #define fund_args novas_fund_args
+#define mean_obliq novas_mean_obliq
 #define vector2radec novas_vector2radec
 #define radec2vector novas_radec2vector
 #define starvectors novas_starvectors

@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 MODULES = slnovas-module.so
 SL_FILES = slnovas.sl
-HLP_FILES = ../doc/help/slnovas.hlp
+#HLP_FILES = ../doc/help/slnovas.hlp
 MODULE_VERSION	= `./mkversion.sh`
 
 #---------------------------------------------------------------------------
@@ -32,8 +32,8 @@ SLANG_LIB	= @SLANG_LIB@ -lslang
 #---------------------------------------------------------------------------
 # Additional Libraries required by the module
 #---------------------------------------------------------------------------
-NOVAS_INC	= @NOVAS_INC@
-NOVAS_LIB	= @NOVAS_LIB@ -lnovas
+NOVAS_INC	= -I@includedir@
+NOVAS_LIB	= -L@libdir@ -llibnovas
 X_XTRA_LIBS	= @X_EXTRA_LIBS@
 MODULE_LIBS	= $(NOVAS_LIB) # $(X_LIBS) $(X_XTRA_LIBS)
 RPATH		= @RPATH@
@@ -116,7 +116,10 @@ install_hlpfiles:
 
 install: all install_directories install_modules install_slfiles install_hlpfiles
 
+check: all
+	cd tests && ./runtests.sh
 clean:
 	-/bin/rm -f $(MODULES) *~ \#*
 distclean: clean
 	-/bin/rm -f config.h Makefile
+.PHONY: all check clean distclean install

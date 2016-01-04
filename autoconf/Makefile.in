@@ -4,18 +4,23 @@
 SHELL = /bin/sh
 
 all:
+	cd libnovas; $(MAKE) all
 	cd src; $(MAKE) all
 clean:
+	cd libnovas; $(MAKE) clean
 	cd src; $(MAKE) clean
 	/bin/rm -f *~ \#*
 distclean: clean
+	cd libnovas; $(MAKE) distclean
 	cd src; $(MAKE) distclean
 	/bin/rm -f config.log config.cache config.status Makefile
-test:
-	cd src; $(MAKE) test
+check:
+	cd libnovas; $(MAKE) check
+	cd src; $(MAKE) check
 install:
+	cd libnovas; $(MAKE) install
 	cd src; $(MAKE) install
-
+#
 configure: autoconf/aclocal.m4 autoconf/configure.ac
 	cd autoconf && autoconf && mv ./configure ..
 update: autoconf/config.sub autoconf/config.guess

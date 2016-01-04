@@ -180,17 +180,14 @@ typedef struct
 
 extern short int novas_app_star (double jd_tt, Novas_cat_entry_t *star,
 				 short int accuracy,
-
 				 double *ra, double *dec);
 
 extern short int novas_virtual_star (double jd_tt, Novas_cat_entry_t *star,
 				     short int accuracy,
-
 				     double *ra, double *dec);
 
 extern short int novas_astro_star (double jd_tt, Novas_cat_entry_t *star,
 				   short int accuracy,
-
 				   double *ra, double *dec);
 
 extern short int novas_app_planet (double jd_tt, Novas_object_t *ss_body,
@@ -205,15 +202,18 @@ extern short int novas_astro_planet (double jd_tt, Novas_object_t *ss_body,
 				     short int accuracy,
 				     double *ra, double *dec, double *dis);
 
-extern short int novas_topo_star (double jd_tt, double delta_t, Novas_cat_entry_t *star,
+extern short int novas_topo_star (double jd_tt, double delta_t,
+				  Novas_cat_entry_t *star,
 				  Novas_on_surface_t *position, short int accuracy,
 				  double *ra, double *dec);
 
-extern short int novas_local_star (double jd_tt, double delta_t, Novas_cat_entry_t *star,
+extern short int novas_local_star (double jd_tt, double delta_t,
+				   Novas_cat_entry_t *star,
 				   Novas_on_surface_t *position, short int accuracy,
 				   double *ra, double *dec);
 
-extern short int novas_topo_planet (double jd_tt, Novas_object_t *ss_body, double delta_t,
+extern short int novas_topo_planet (double jd_tt, Novas_object_t *ss_body,
+				    double delta_t,
 				    Novas_on_surface_t *position, short int accuracy,
 				    double *ra, double *dec, double *dis);
 
@@ -346,7 +346,7 @@ extern void novas_nutation_angles (double t, short int accuracy,
 extern void novas_fund_args (double t,
 			     double a[5]);
 
-double mean_obliq (double jd_tdb);
+extern double novas_mean_obliq (double jd_tdb);
 
 extern short int novas_vector2radec (double *pos,
 				     double *ra, double *dec);
@@ -438,12 +438,12 @@ extern void novas_make_on_surface (double latitude, double longitude,
 extern void novas_make_in_space (double sc_pos[3], double sc_vel[3],
 				 Novas_in_space_t *obs_space);
 
-short int novas_ephem_open (char *ephem_name,
+extern short int novas_ephem_open (char *ephem_name,
 			    double *jd_begin, double *jd_end,
 			    short int *de_number);
-short int novas_ephem_close (void);
+extern short int novas_ephem_close (void);
 
-short int novas_planet_ephemeris (double tjd[2], short int target,
+extern short int novas_planet_ephemeris (double tjd[2], short int target,
 				  short int center,
 				  double *position, double *velocity);
 

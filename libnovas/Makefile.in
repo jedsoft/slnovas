@@ -7,6 +7,7 @@ NOVAS_SOLSYS_MODEL = 1
 # ---------------------------------------------------------------------------
 prefix = @prefix@
 exec_prefix = @exec_prefix@
+datarootdir = @datarootdir@/libnovas
 install_lib_dir = @libdir@
 install_include_dir = @includedir@
 #
@@ -23,10 +24,12 @@ MKINSDIR	= ../autoconf/mkinsdir.sh
 # DESTDIR =
 DEST_LIBDIR = $(DESTDIR)$(install_lib_dir)
 DEST_INCDIR = $(DESTDIR)$(install_include_dir)
+DEST_DATADIR= $(DESTDIR)$(datarootdir)
 #
 CC_SHARED 	= @CC_SHARED@
-DEFS = -DNOVAS_SOLSYS_MODEL=$(NOVAS_SOLSYS_MODEL)
+DEFS = -DNOVAS_SOLSYS_MODEL=$(NOVAS_SOLSYS_MODEL) -DNOVAS_DATADIR='"$(datarootdir)"'
 #
+all: lib$(LIBNAME).so cio_ra.bin
 lib$(LIBNAME).so: libnovas.c libnovas.h _libnovas.h Makefile
 	$(CC_SHARED) $(DEFS) libnovas.c -o lib$(LIBNAME).so -lm
 testnovas: lib$(LIBNAME).so testnovas.c
@@ -36,15 +39,25 @@ example: lib$(LIBNAME).so example.c
 check: testnovas
 	./runtest.sh
 # ---------------------------------------------------------------------------
-install: lib$(LIBNAME).so
+install: lib$(LIBNAME).so cio_ra.bin
 	$(MKINSDIR) $(DEST_LIBDIR)
 	$(MKINSDIR) $(DEST_INCDIR)
+	$(MKINSDIR) $(DEST_DATADIR)
 	$(INSTALL_DATA) libnovas.h $(DEST_INCDIR)/
 	$(INSTALL_DATA) lib$(LIBNAME).so $(DEST_LIBDIR)/
+	$(INSTALL_DATA) cio_ra.bin $(DEST_DATADIR)/
+	$(INSTALL_DATA) DE421/lnxp1900p2053.421 $(DEST_DATADIR)/
+	cd $(DEST_DATADIR) && ln -sf lnxp1900p2053.421 JPLEPH
 #
+cio_file: Cdist/cio_file.c
+	$(CC) $(CFLAGS) -o cio_file Cdist/cio_file.c
+CIO_RA.TXT: Cdist/CIO_RA.TXT.gz
+	gzip -c -d Cdist/CIO_RA.TXT.gz > CIO_RA.TXT
+cio_ra.bin: cio_file CIO_RA.TXT
+	./cio_file
 clean:
-	rm -f *~ testnovas example lib$(LIBNAME).so testnovas.out
+	rm -f *~ testnovas example lib$(LIBNAME).so testnovas.out CIO_RA.TXT cio_file
 distclean: clean
-	rm -f Makefile
+	rm -f Makefile cio_ra.bin
 #
 .PHONY: clean distclean
