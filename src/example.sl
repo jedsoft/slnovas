@@ -5,7 +5,7 @@ private variable DEG2RAD = 0.017453292519943296;
 
 public define slsh_main ()
 {
-   variable year = 2015, month = 12, day = 15, leap_secs = 33, accuracy = 0;
+   variable year = 2016, month = 1, day = 7, leap_secs = 33, accuracy = 0;
 
    variable hour = 10 + 5.0/60 + 5;
    variable ut1_utc = -0.387845;

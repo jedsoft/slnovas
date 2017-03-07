@@ -1,0 +1,1308 @@
+app_star
+
+ SYNOPSIS
+  Compute the apparant place of a star
+
+ USAGE
+  (ra, dec) = app_star(jd_tt, cat_entry, accuracy)
+
+ DESCRIPTION
+ Computes the apparent place of a star at date `jd_tt', given its
+ catalog mean place, proper motion, parallax, and radial velocity.
+ The second parameter is the catalog entry for the star, and `accuracy' specifies the accuracy of the calculation: 0 for full accuracy, 1 for reduced accuracy..
+
+ The function returns the (ra, dec) of the object referred to the true
+ equator and equinox of the specified date.  The right ascension is
+ given in hours.
+
+ SEE ALSO
+  virtual_star
+
+--------------------------------------------------------------
+
+virtual_star
+
+ SYNOPSIS
+  Compute the virtual place of a star
+
+ USAGE
+  (ra, dec) = virtual_star(jd_tt, cat_entry, accuracy)
+
+ DESCRIPTION
+ Computes the virtual place of a star at date `jd_tt', given its
+ catalog mean place, proper motion, parallax, and radial velocity.
+ The second parameter is the catalog entry for the star, and
+ `accuracy' specifies the accuracy of the calculation: 0 for full
+ accuracy, 1 for reduced accuracy.
+
+ The function returns the (ra, dec) of the object referred to the GCRS.
+ The right ascension is given in hour and the declination in degrees.
+
+ SEE ALSO
+  app_star
+
+--------------------------------------------------------------
+
+astro_star
+
+ SYNOPSIS
+  Compute the astrometric place of a star
+
+ USAGE
+  (ra, dec) = astro_star(jd_tt, cat_entry, accuracy)
+
+ DESCRIPTION
+ Computes the astrometric place of a star at date `jd_tt', given its
+ catalog mean place, proper motion, parallax, and radial velocity.
+ The second parameter is the catalog entry for the star, and
+ `accuracy' specifies the accuracy of the calculation: 0 for full
+ accuracy, 1 for reduced accuracy.
+
+ The function returns the (ra, dec) of the object referred to the
+ ICRS, without light deflection or aberration. The right ascension is
+ given in hours.
+
+ SEE ALSO
+  app_star
+
+--------------------------------------------------------------
+
+app_planet
+
+ SYNOPSIS
+  Compute the apparent place of a solar system body
+
+ USAGE
+  (ra, dec, dis) = app_planet (jd_tt, body, accuracy)
+
+ DESCRIPTION
+  This function computes the apparent place of the specified solar
+  system body at the specified Julian date.  If `accuracy' is 0,
+  the full accuracy calculation will be performed, and if 1, a reduced
+  accuracy calculation will be done.
+
+  The function returns the (ra, dec, dist) of the apparant position of the
+  body with respect to the true equator and equinox of `jd_tt'.
+  The right ascension is given in hours and the declination in degrees.
+  The distance is in units of AU.
+
+ SEE ALSO
+  app_star
+
+--------------------------------------------------------------
+
+virtual_planet
+
+ SYNOPSIS
+  Compute the virtual place of a solar system body
+
+ USAGE
+  (ra, dec, dis) = virtual_planet (jd_tt, body, accuracy)
+
+ DESCRIPTION
+  This function computes the virtual place of the specified solar
+  system body at the specified Julian date.  If `accuracy' is 0,
+  the full accuracy calculation will be performed, and if 1, a reduced
+  accuracy calculation will be done.
+
+  The function returns the (ra, dec, dist) of the apparant position of
+  the body with respect to the GCRS. The right ascension is given in
+  hours and the declination in degrees.  The distance is in units of
+  AU.
+
+ SEE ALSO
+  app_star
+
+--------------------------------------------------------------
+
+astro_planet
+
+ SYNOPSIS
+  Compute the astrometric place of a solar system body
+
+ USAGE
+  (ra, dec, dis) = astro_planet (jd_tt, body, accuracy)
+
+ DESCRIPTION
+  This function computes the astrometric place of the specified solar
+  system body at the specified Julian date.  If `accuracy' is 0,
+  the full accuracy calculation will be performed, and if 1, a reduced
+  accuracy calculation will be done.
+
+  The function returns the (ra, dec, dist) of the apparant position of the
+  body with respect to the ICRS without light deflection or aberration
+  The right ascension is given in hours and the declination in
+  degrees.  The distance is in units of AU.
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+topo_star
+
+ SYNOPSIS
+  Compute the topocentric place of a star
+
+ USAGE
+  (ra, dec) = topo_star(jd_tt, delta_t, star, position, accuracy)
+
+ DESCRIPTION
+ Computes the topocentric place of a star at Julian date `jd_tt',
+ given its catalog mean place, proper motion, parallax, and radial
+ velocity. `delta_t' is the difference between in seconds between TT and UT1 at the specified Julian date, `star' is the
+ catalog entry for the object in the ICRS, and `position' is the
+ surface object for the position of the observer.  If `accuracy'
+ is 0, a full accuracy calculation will be performed, otherwise if 1,
+ a reduced accuracy calculation will be done.
+
+ The function returns the (ra in hours, dec in degrees) with respect
+ to the true equator and equinox of date `jd_tt'.
+
+ SEE ALSO
+  local_star
+
+--------------------------------------------------------------
+
+local_star
+
+ SYNOPSIS
+  Compute the local place of a star
+
+ USAGE
+  (ra, dec) = local_star(jd_tt, delta_t, star, position, accuracy)
+
+ DESCRIPTION
+ Computes the local place of a star at Julian date `jd_tt',
+ given its catalog mean place, proper motion, parallax, and radial
+ velocity.  `delta_t' is the difference between in seconds
+ between TT and UT1 at the specified Julian date, `star' is the
+ catalog entry for the object in the ICRS, and `position' is the
+ surface object for the position of the observer.  If `accuracy'
+ is 0, a full accuracy calculation will be performed, otherwise if 1,
+ a reduced accuracy calculation will be done.
+
+ The function returns the local (ra in hours, dec in degrees) with respect
+ to the local GCRS.
+
+ SEE ALSO
+  topo_star
+
+--------------------------------------------------------------
+
+topo_planet
+
+ SYNOPSIS
+  Compute the local place of a solar system body
+
+ USAGE
+  (ra, dec, dis) = topo_planet(jd_tt, ss_body, delta_t, position, accuracy)
+
+ DESCRIPTION
+ Computes the topocentric place of a solar system body at the Julian
+ date `jd_tt'.  `delta_t' is the difference
+ between in seconds between TT and UT1 at the specified Julian date,
+ `ss_body' specifies the solar system object, and
+ `position' is the surface object for the position of the
+ observer.  If `accuracy' is 0, a full accuracy calculation will
+ be performed, otherwise if 1, a reduced accuracy calculation will be
+ done.
+
+ The function returns the local (ra in hours, dec in degrees, dist in AU) with respect
+ to the true equator and equinox of the date.
+
+ SEE ALSO
+  local_planet, astro_planet, topo_star
+
+--------------------------------------------------------------
+
+local_planet
+
+ SYNOPSIS
+  Compute the local place of a solar system body
+
+ USAGE
+  (ra, dec, dis) = local_planet(jd_tt, ss_body, delta_t, position, accuracy)
+
+ DESCRIPTION
+ Computes the local place of a solar system body at the Julian
+ date `jd_tt'.  `delta_t' is the difference
+ between in seconds between TT and UT1 at the specified Julian date,
+ `ss_body' specifies the solar system object, and
+ `position' is the surface object for the position of the
+ observer.  If `accuracy' is 0, a full accuracy calculation will
+ be performed, otherwise if 1, a reduced accuracy calculation will be
+ done.
+
+ The function returns the local (ra in hours, dec in degrees, dist in
+ AU) with respect to the local GCRS.
+
+ SEE ALSO
+  topo_planet, virtual_planet, local_star
+
+--------------------------------------------------------------
+
+mean_star
+
+ SYNOPSIS
+
+ USAGE
+  (ira, idec) = mean_star(jd_tt, ra, dec, accuracy)
+
+ DESCRIPTION
+  Computes the ICRS position of a star, given its apparent place at
+  date `jd_tt'.  Proper motion, parallax and radial velocity are
+  assumed to be zero.  The input arguments `(ra, dec)' are the
+  apparant right ascension in hours and declination in degrees with
+  respect to the true equator and equinox of the date. If
+  `accuracy' is 0, a full accuracy calculation will be performed,
+  otherwise if 1, a reduced accuracy calculation will be done.
+
+  The function returns the ICRS (ra in hours, dec in degrees).
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+place
+
+ SYNOPSIS
+  Compute the apparent direction of a star or solar system body
+
+ USAGE
+  struct sky_pos = place(jd_tt, cel_object, location, delta_t, coord_sys, accuracy)
+
+ DESCRIPTION
+  This function computes the apparent direction of a star or solar
+  system body at the Julian date `jd_tt' and in specified coordinate
+  system.  The `cel_object' parameter specifies the celestial
+  object, the `location' parameter specifies the observers
+  location, `delta_t' is the difference between TT and UT1 and
+  `jd_tt', and `coord_sys' is one of the following:
+
+    0 ... GCRS or "local GCRS"
+    1 ... true equator and equinox of date
+    2 ... true equator and CIO of date
+    3 ... astrometric coordinates, i.e., without light deflection or aberration.
+
+  If `accuracy' is 0, a full accuracy calculation will be
+  performed, otherwise a reduced accuracy one will be done.
+
+  The function returns a structure giving the position of the object
+  in the sky with respect to the specified coordinate system.
+
+ NOTES
+   Values of `location.where' and `coord_sys' dictate the various
+   standard kinds of place:
+
+   location.where = 0 and coord_sys = 1: apparent place
+   location.where = 1 and coord_sys = 1: topocentric place
+   location.where = 0 and coord_sys = 0: virtual place
+   location.where = 1 and coord_sys = 0: local place
+   location.where = 0 and coord_sys = 3: astrometric place
+   location.where = 1 and coord_sys = 3: topocentric astrometric place
+
+
+ The value of `delta_t' is used only when `location.where'
+ equals 1 or 2 (observer is on surface of Earth or in a
+ near-Earth satellite).
+
+ SEE ALSO
+  topo_planet
+
+--------------------------------------------------------------
+
+julian_date
+
+ SYNOPSIS
+
+ USAGE
+  jd = julian_date(year, month, day, hour)
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+equ2gal
+
+ SYNOPSIS
+  Convert ICRS ra/dec to galactic lon/lat
+
+ USAGE
+  (ra, dec) = equ2gal(rai, deci)
+
+ DESCRIPTION
+  This function converts the specified ICRS right ascension and
+  declination to galactic longitude and latitude and returns the result.
+
+ SEE ALSO
+  equ2ecl, equ2hor
+
+--------------------------------------------------------------
+
+equ2ecl
+
+ SYNOPSIS
+  Convert ra/dec to ecliptic lon/lat
+
+ USAGE
+  (elon, elat) = equ2ecl(jd_tt, coord_sys, accuracy, ra, dec)
+
+ DESCRIPTION
+ This function converts right ascension and declination to ecliptic longitude
+ and latitude.  The `jd_tt' argument gives the Julian date of the
+ equator, equinox, and ecliptic used.  The `coord_sys' parameter
+ specifies the coordinate system:
+
+  0 ... mean equator and equinox of date 'jd_tt'
+  1 ... true equator and equinox of date 'jd_tt'
+  2 ... ICRS
+  (ecliptic is always the mean plane)
+
+  If `accuracy' is 0, a full accuracy calculation will be
+  performed, otherwise a reduced accuracy one will be done.
+
+ NOTES
+
+ SEE ALSO
+  equ2gal, equ2hor, equ2ecl_vec
+
+--------------------------------------------------------------
+
+equ2hor
+
+ SYNOPSIS
+  transforms topocentric ra/dec to zenith distance and azimuth
+
+ USAGE
+  (zd,az,rar,decr)=equ2hor(jd_ut1, delta_t, accuracy, xp, yp, location, ra, dec, ref_option)
+
+ DESCRIPTION
+  This function transforms topocentric right ascension and
+  declination to zenith distance and azimuth.  It uses a method
+  that properly accounts for polar motion, which is significant at
+  the sub-arcsecond level.  This function can also adjust
+  coordinates for atmospheric refraction.
+
+  `jd_ut1' specifies the UT1 Julian date in seconds, and `delta_t' is the difference between in seconds between TT and UT1 at the specified Julian date.
+  The parameters `(xp,yp)' give the conventionally defined x and
+  y coordinates of the intermediate pole with respect to the ITRS
+  reference pole in arc-seconds.  The observer's surface location is
+  given by the `location' argument, and `(ra,dec)' specifies
+  the topocentric right ascension and declination of the object of
+  interest with respect to the true equator and equinox of the date.
+  The `ref_option' parameter specifies how refraction should be
+  handled:
+
+    0 ... no refraction
+    1 ... include refraction, using 'standard' atmospheric conditions.
+    2 ... include refraction, using atmospheric parameters input in
+      the 'location' structure.
+
+
+  The function returns the following 4 values:
+
+  zd: Topocentric zenith distance in degrees, affected by
+       refraction if 'ref_option' is non-zero.
+  az: Topocentric azimuth (measured east from north) in degrees.
+ rar: Topocentric right ascension of object of interest, in hours,
+       referred to true equator and equinox of date, affected by
+       refraction if 'ref_option' is non-zero.
+decr: Topocentric declination of object of interest, in degrees,
+       referred to true equator and equinox of date, affected by
+       refraction if 'ref_option' is non-zero.
+
+
+ SEE ALSO
+  equ2gal
+
+--------------------------------------------------------------
+
+sidereal_time
+
+ SYNOPSIS
+  Compute the Greenwich mean or apparent sidereal time
+
+ USAGE
+  t = sidereal_time(jd_high, jd_low, delta_t, gst_type, method, accuracy)
+
+ DESCRIPTION
+  This function computes the Greenwich sidereal time, either mean or
+  apparent, at Julian date date `jd_high+jd_low'.
+  The parameter `delta_t' is the difference between in seconds between TT and UT1 at the specified Julian date.
+  If `gst_type' is 0, the Greenwich mean sidereal time will be
+  computed, and if `gst_type' is 1, the apparent time will be
+  computed.  If `method' is 0, a CIO-based method will be used,
+  otherwise a equinox-based method will be used.  `accuracy' specifies the accuracy of the calculation: 0 for full accuracy, 1 for reduced accuracy..
+
+  The function returns the Greenwich (mean or apparent) sidereal time
+  in hours.
+
+ SEE ALSO
+  era, julian_date
+
+--------------------------------------------------------------
+
+era
+
+ SYNOPSIS
+  Compute the value of the Earth Rotation Angle
+
+ USAGE
+  theta = era(jd_high, jd_low)
+
+ DESCRIPTION
+  This function returns the value of the Earth Rotation Angle (theta)
+  for a given UT1 Julian date.  The expression used is taken from the
+  note to IAU Resolution B1.8 of 2000.  The parameters
+  `jd_high/jd_low' specify the high/low order parts of the UT1
+  Julian date.
+
+  The function returns the Earth Rotation Angle in degrees.
+
+ SEE ALSO
+  julian_date
+
+--------------------------------------------------------------
+
+ephemeris
+
+ SYNOPSIS
+
+ USAGE
+  ephemeris()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+equ2ecl_vec
+
+ SYNOPSIS
+  Convert an equatorial position vector to an ecliptic position vector
+
+ USAGE
+  v2 = equ2ecl_vec(jd_tt, coord_sys, accuracy, v1)
+
+ DESCRIPTION
+ This function Converts an equatorial position vector `v1' to an
+ ecliptic position vector.  The `jd_tt' parameter gives the
+ Julian date of the equator, equinox, and ecliptic used for the
+ coordinates, and coord_sys specifies the coordinate system to use:
+
+  0 ... mean equator and equinox of date 'jd_tt'
+  1 ... true equator and equinox of date 'jd_tt'
+  2 ... ICRS
+  (ecliptic is always the mean plane)
+
+ `accuracy' specifies the accuracy of the calculation: 0 for full accuracy, 1 for reduced accuracy..
+
+ The function returns the transformed vector referred to specified
+ ecliptic and equinox of date.
+
+ NOTES
+  To convert an ICRS vector to an ecliptic vector (mean ecliptic
+  and equinox of J2000.0 only), set `coord_sys = 2'; the value
+  of `jd_tt' can be set to anything, since J2000.0 is assumed.
+
+  Except for the input to this case, all vectors are assumed
+  to be with respect to a dynamical system.
+
+ SEE ALSO
+  ecl2equ_vec
+
+--------------------------------------------------------------
+
+ecl2equ_vec
+
+ SYNOPSIS
+
+ USAGE
+  ecl2equ_vec()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+gcrs2equ
+
+ SYNOPSIS
+
+ USAGE
+  gcrs2equ()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+vector2radec
+
+ SYNOPSIS
+
+ USAGE
+  vector2radec()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+ter2cel
+
+ SYNOPSIS
+  Rotate a vector from the terrestrial to the celestial system
+
+ USAGE
+  v_cel = ter2cel(jd_ut_high, jd_ut_low, delta_t, method, accuracy, option, xp, yp, v_ter)
+
+ DESCRIPTION
+  This function rotates a vector from the terrestrial to the
+  celestial system.  Specifically, it transforms a vector in the
+  ITRS (rotating earth-fixed system) to the GCRS (a local space-fixed
+  system) by applying rotations for polar motion, Earth
+  rotation, nutation, precession, and the dynamical-to-GCRS
+  frame tie.
+
+  The parameters `(jd_ut_high, jd_ut_low)' specify the high and
+  low order parts of the UT1 Julian date.  The parameter `delta_t' is the difference between in seconds between TT and UT1 at the specified Julian date.  If
+  `method' is 0, a CIO-based method will be used, otherwise an
+  equinox-based on will be used.  `accuracy' specifies the accuracy of the calculation: 0 for full accuracy, 1 for reduced accuracy..  If `option' is 0,
+  the output will be referred to the GCRS axes, and if 1, it will be
+  with respect to the equator and equinox of date.  The `(xp,yp)'
+  parameters give the conventionally-defined (x,y) coordinates of the
+  ITRS pole in arc-seconds.  The vector `v_ter' is the vector to be
+  rotated, in geocentric equatorial rectangular coordinates,
+  referred to ITRS axes (terrestrial system) in the normal case
+  where 'option' = 0.
+
+  The function returns a vector in geocentric equatorial rectangular
+  coordinates, referred to GCRS axes (celestial system) or with
+  respect to the equator and equinox of date, depending on
+  `option'.
+
+ NOTES
+  `xp = yp = 0' means no polar motion transformation.
+
+  The `option' flag only works for the equinox-based method.
+
+ SEE ALSO
+  cel2ter
+
+--------------------------------------------------------------
+
+cel2ter
+
+ SYNOPSIS
+  Rotate a vector from the celestial to the terrestrial system
+
+ USAGE
+  v_ter = cel2ter(jd_ut_high, jd_ut_low, delta_t, method, accuracy, option, xp, yp, v_cel)
+
+ DESCRIPTION
+  This function is the reverse of `ter2cel'.  See its
+  documentation for a description of the input arguments.
+
+ SEE ALSO
+  ter2cel
+
+--------------------------------------------------------------
+
+ephem_open
+
+ SYNOPSIS
+
+ USAGE
+  ephem_open()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+ephem_close
+
+ SYNOPSIS
+
+ USAGE
+  ephem_close()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+aberration
+
+ SYNOPSIS
+
+ USAGE
+  aberration()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+bary2obs
+
+ SYNOPSIS
+
+ USAGE
+  bary2obs()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+cal_date
+
+ SYNOPSIS
+
+ USAGE
+  cal_date()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+cel_pole
+
+ SYNOPSIS
+
+ USAGE
+  cel_pole()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+cio_array
+
+ SYNOPSIS
+
+ USAGE
+  cio_array()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+cio_basis
+
+ SYNOPSIS
+
+ USAGE
+  cio_basis()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+cio_location
+
+ SYNOPSIS
+
+ USAGE
+  cio_location()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+cio_ra
+
+ SYNOPSIS
+
+ USAGE
+  cio_ra()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+d_light
+
+ SYNOPSIS
+
+ USAGE
+  d_light()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+ee_ct
+
+ SYNOPSIS
+
+ USAGE
+  ee_ct()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+e_tilt
+
+ SYNOPSIS
+
+ USAGE
+  e_tilt()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+frame_tie
+
+ SYNOPSIS
+
+ USAGE
+  frame_tie()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+fund_args
+
+ SYNOPSIS
+
+ USAGE
+  fund_args()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+geo_posvel
+
+ SYNOPSIS
+
+ USAGE
+  geo_posvel()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+grav_def
+
+ SYNOPSIS
+
+ USAGE
+  grav_def()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+grav_vec
+
+ SYNOPSIS
+
+ USAGE
+  grav_vec()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+ira_equinox
+
+ SYNOPSIS
+
+ USAGE
+  ira_equinox()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+light_time
+
+ SYNOPSIS
+
+ USAGE
+  light_time()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+limb_angle
+
+ SYNOPSIS
+
+ USAGE
+  limb_angle()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+mean_obliq
+
+ SYNOPSIS
+
+ USAGE
+  mean_obliq()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+norm_ang
+
+ SYNOPSIS
+
+ USAGE
+  norm_ang()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+nutation
+
+ SYNOPSIS
+
+ USAGE
+  nutation()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+nutation_angles
+
+ SYNOPSIS
+
+ USAGE
+  nutation_angles()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+planet_ephemeris
+
+ SYNOPSIS
+
+ USAGE
+  planet_ephemeris()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+precession
+
+ SYNOPSIS
+
+ USAGE
+  precession()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+proper_motion
+
+ SYNOPSIS
+
+ USAGE
+  proper_motion()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+radec2vector
+
+ SYNOPSIS
+
+ USAGE
+  radec2vector()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+rad_vel
+
+ SYNOPSIS
+
+ USAGE
+  rad_vel()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+refract
+
+ SYNOPSIS
+
+ USAGE
+  refract()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+spin
+
+ SYNOPSIS
+  Rotate a vector about the z-axis
+
+ USAGE
+  v2 = spin(angle, v1)
+
+ DESCRIPTION
+  This function rotates the vector `v1' about the z-axis by an
+  `angle' degrees.  The rotated angle is returned.
+
+ NOTES
+  This corresponds to a right-handed rotation about the +z-axis.
+
+ SEE ALSO
+  wobble
+
+--------------------------------------------------------------
+
+starvectors
+
+ SYNOPSIS
+
+ USAGE
+  starvectors()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+tdb2tt
+
+ SYNOPSIS
+
+ USAGE
+  tdb2tt()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+terra
+
+ SYNOPSIS
+
+ USAGE
+  terra()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+transform_cat
+
+ SYNOPSIS
+
+ USAGE
+  transform_cat()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+transform_hip
+
+ SYNOPSIS
+
+ USAGE
+  transform_hip()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+wobble
+
+ SYNOPSIS
+
+ USAGE
+  wobble()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------
+
+novas_set_throw_callback
+
+ SYNOPSIS
+
+ USAGE
+  novas_set_throw_callback()
+
+ DESCRIPTION
+
+ EXAMPLE
+
+ NOTES
+
+ SEE ALSO
+
+--------------------------------------------------------------

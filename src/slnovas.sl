@@ -263,6 +263,9 @@ define make_cat_entry (starname, catalog, star_num, ra, dec,
 
 define make_object (type, number, name, star_data)
 {
+   if (star_data == NULL)
+     star_data = make_cat_entry ("NULL_STAR","   ",
+				 0L,0.0,0.0,0.0,0.0,0.0,0.0);
    return struct
      {
 	type = type,
