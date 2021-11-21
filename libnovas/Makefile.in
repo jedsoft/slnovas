@@ -31,11 +31,11 @@ DEFS = -DNOVAS_SOLSYS_MODEL=$(NOVAS_SOLSYS_MODEL) -DNOVAS_DATADIR='"$(datarootdi
 #
 all: lib$(LIBNAME).so cio_ra.bin
 lib$(LIBNAME).so: libnovas.c libnovas.h _libnovas.h Makefile
-	$(CC_SHARED) $(DEFS) libnovas.c -o lib$(LIBNAME).so -lm
+	$(CC_SHARED) $(DEFS) libnovas.c $(LDFLAGS) -o lib$(LIBNAME).so -lm
 testnovas: lib$(LIBNAME).so testnovas.c
-	$(CC) $(CFLAGS) $(DEFS) testnovas.c -o testnovas -L. -l$(LIBNAME) -lm
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEFS) $(LDFLAGS) testnovas.c -o testnovas -L. -l$(LIBNAME) -lm
 example: lib$(LIBNAME).so example.c
-	$(CC) $(CFLAGS) $(DEFS) example.c -o example -L. -l$(LIBNAME) -lm
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEFS) $(LDFLAGS) example.c -o example -L. -l$(LIBNAME) -lm
 check: testnovas
 	./runtest.sh
 # ---------------------------------------------------------------------------
@@ -50,7 +50,7 @@ install: lib$(LIBNAME).so cio_ra.bin
 	cd $(DEST_DATADIR) && ln -sf lnxp1900p2053.421 JPLEPH
 #
 cio_file: Cdist/cio_file.c
-	$(CC) $(CFLAGS) -o cio_file Cdist/cio_file.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o cio_file Cdist/cio_file.c
 CIO_RA.TXT: Cdist/CIO_RA.TXT.gz
 	gzip -c -d Cdist/CIO_RA.TXT.gz > CIO_RA.TXT
 cio_ra.bin: cio_file CIO_RA.TXT

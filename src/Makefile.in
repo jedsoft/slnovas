@@ -54,6 +54,8 @@ DEST_MODULE_INSTALL_DIR = $(DESTDIR)$(MODULE_INSTALL_DIR)
 DEST_SL_FILES_INSTALL_DIR = $(DESTDIR)$(SL_FILES_INSTALL_DIR)
 DEST_HLP_FILES_INSTALL_DIR = $(DESTDIR)$(HLP_FILES_INSTALL_DIR)
 #---------------------------------------------------------------------------
+UPDATE_VERSION_SCRIPT = $(HOME)/bin/update_changes_version
+#---------------------------------------------------------------------------
 LIBS = $(SLANG_LIB) $(MODULE_LIBS) $(RPATH) $(DL_LIB) -lm
 INCS = $(SLANG_INC) $(NOVAS_INC)
 
@@ -62,8 +64,12 @@ all: $(MODULES)
 #---------------------------------------------------------------------------
 # Put Rules to create the modules here
 #---------------------------------------------------------------------------
-slnovas-module.so: slnovas-module.c
-	$(CC_SHARED) $(INCS) slnovas-module.c -o slnovas-module.so $(LIBS)
+slnovas-module.so: slnovas-module.c version.h
+	$(CC_SHARED) $(INCS) $(LDFLAGS) slnovas-module.c -o slnovas-module.so $(LIBS)
+version.h: ../changes.txt
+	if [ -x $(UPDATE_VERSION_SCRIPT) ]; then \
+	  $(UPDATE_VERSION_SCRIPT) ../changes.txt ./version.h; \
+	fi
 #---------------------------------------------------------------------------
 # Regression tests
 #---------------------------------------------------------------------------
