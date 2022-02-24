@@ -75,8 +75,6 @@
 
 Coordinate systems
 
-GCRS:
-
 The Geocentric Celestial Reference System (GCRS) is the system
 appropriate for describing the rotation of the Earth, the orbits of
 Earth satellites, and geodetic quantities such as instrument locations

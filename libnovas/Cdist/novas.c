@@ -7471,22 +7471,18 @@ short int cio_location (double jd_tdb, short int accuracy,
 
    static ra_of_cio *cio;
 
-   static FILE *cio_file;
-
 /*
    Check if the input external binary file exists and can be read.
 */
 
    if (first_call)
    {
-      if ((cio_file = fopen ("cio_ra.bin", "rb")) == NULL)
+      FILE *cio_file = fopen ("cio_ra.bin", "rb");
+      use_file = 0;
+      if (cio_file != NULL)
       {
-         use_file = 0;
-      }
-       else
-      {
-         use_file = 1;
          fclose (cio_file);
+         use_file = 1;
       }
    }
 

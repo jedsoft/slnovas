@@ -26,6 +26,8 @@ DEST_LIBDIR = $(DESTDIR)$(install_lib_dir)
 DEST_INCDIR = $(DESTDIR)$(install_include_dir)
 DEST_DATADIR= $(DESTDIR)$(datarootdir)
 #
+CC		= @CC@
+CFLAGS		= @CFLAGS@
 CC_SHARED 	= @CC_SHARED@
 DEFS = -DNOVAS_SOLSYS_MODEL=$(NOVAS_SOLSYS_MODEL) -DNOVAS_DATADIR='"$(datarootdir)"'
 #

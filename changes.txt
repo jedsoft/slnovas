@@ -1,5 +1,6 @@
 Changes since 0.0.0
 1. Updated aclocal.m4; added support for CPPFLAGS (based upon patch from Rafael Laboissière)
+2. Added @CC@ and @CFLAGS@ constructs to Makefile.in
 
 
 
